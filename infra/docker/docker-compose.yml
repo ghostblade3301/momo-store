@@ -1,5 +1,3 @@
-version: "3.9"
-
 networks:
   momo-store:
     driver: bridge
@@ -10,7 +8,7 @@ services:
     container_name: frontend
     restart: always
     ports:
-      - "8080:8080"
+      - "80:80"
     networks:
       - momo-store
 
