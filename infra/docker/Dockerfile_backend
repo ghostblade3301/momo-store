@@ -2,7 +2,5 @@ FROM golang:1.22 AS builder
 WORKDIR /app
 COPY backend/ .
 RUN GOOS=linux go build -o app ./cmd/api
-FROM gcr.io/distroless/base-debian12 AS build-release-stage
-WORKDIR /
-COPY --from=builder app .
-CMD ["./app"]
+RUN ls -la
+ENTRYPOINT ["./app"]
