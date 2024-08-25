@@ -4,10 +4,5 @@ COPY frontend/ .
 RUN npm ci && npm run build
 
 FROM nginx:latest
-WORKDIR /app
+WORKDIR /momo-store
 COPY --from=builder /app/dist .
-RUN ls -la
-WORKDIR /app/dist/
-RUN ls -la
-
-
