@@ -5,5 +5,5 @@ RUN GOOS=linux go build -o momo-backend ./cmd/api
 
 FROM gcr.io/distroless/base-debian12 AS build-release-stage
 WORKDIR /
-COPY --from=builder /app/backend /app/backend
+COPY --from=builder /app/momo-backend /app/momo-backend
 ENTRYPOINT ["/app/momo-backend"]
