@@ -16,7 +16,5 @@ backend:
     include: "backend/.gitlab-ci.yml"
     strategy: depend
   only:
-    - backend-ci
-  # only:
-  #   changes:
-  #     - backend/*
+    changes:
+      - backend/*
