@@ -18,7 +18,7 @@ build-backend-code-job:
   script:
     - cd backend/cmd/api/
     - go build -o momo-backend-${VERSION}
-    - tar czvf momo-backend-${VERSION}.tar.gz momo-backend${VERSION}
+    - tar czvf momo-backend-${VERSION}.tar.gz momo-backend$-{VERSION}
     - curl -v -u "${NEXUS_REPO_USER}:${NEXUS_REPO_PASS}" --upload-file momo-backend-${VERSION}.tar.gz ${NEXUS_BACKEND_NAME}/${VERSION}/momo-backend-${VERSION}.tar.gz
 
 go-test-code-job:
