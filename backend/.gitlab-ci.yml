@@ -8,7 +8,6 @@ stages:
   - build
   - test
   - release
-  - deploy
 
 build-backend-code-job:
   image: golang:1.23.0-alpine3.20
