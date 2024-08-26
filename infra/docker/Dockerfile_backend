@@ -1,9 +1,9 @@
 FROM golang:1.22 AS builder
 WORKDIR /app
 COPY backend/ .
-RUN GOOS=linux go build -o backend ./cmd/api
+RUN GOOS=linux go build -o momo-backend ./cmd/api
 
 FROM gcr.io/distroless/base-debian12 AS build-release-stage
 WORKDIR /
-COPY --from=builder /app/backend /app/backend
-ENTRYPOINT ["/app/backend"]
+COPY --from=builder /app/momo-backend /app/momo-backend
+ENTRYPOINT ["/app/momo-backend"]

@@ -1,0 +1,76 @@
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+variables:
+  VERSION: "0.1.${CI_PIPELINE_ID}"
+
+stages:
+  - build
+  - test
+  - release
+
+build-backend-code-job:
+  image: golang:1.23.0-alpine3.20
+  stage: build
+  before_script:
+    - apk add curl tar
+  script:
+    - cd backend/cmd/api/
+    - go build -o momo-backend-${VERSION}
+    - tar czvf momo-backend-${VERSION}.tar.gz momo-backend-${VERSION}
+    - curl -v -u "${NEXUS_REPO_USER}:${NEXUS_REPO_PASS}" --upload-file momo-backend-${VERSION}.tar.gz ${NEXUS_REPO_URL}/${NEXUS_BACKEND_NAME}/${VERSION}/momo-backend-${VERSION}.tar.gz
+
+build-backend-docker-job:
+  stage: build
+  image: 
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/infra/docker/Dockerfile_backend"
+      --destination "${CI_REGISTRY_IMAGE}/momo-store-backend:${VERSION}"
+      --build-arg VERSION=$VERSION
+      --cache=true
+
+go-test-code-job:
+  image: golang:1.23.0-alpine3.20
+  stage: test 
+  variables:
+    CGO_ENABLED: 0
+  dependencies:
+    - build-backend-code-job
+  script:
+    - cd backend/cmd/api
+    - go test -v ./...
+
+sonarqube-backend-sast:
+  stage: test
+  dependencies:
+    - build-backend-code-job
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  allow_failure: true
+  script:
+    - cd backend
+    - >
+      sonar-scanner 
+      -Dsonar.projectName=${SONAR_PROJECT_KEY_BACK}
+      -Dsonar.projectKey=${SONAR_PROJECT_KEY_BACK}
+      -Dsonar.sources=.
+      -Dsonar.host.url=${SONARQUBE_URL}
+      -Dsonar.login=${SONAR_LOGIN_BACK}
+
+release:
+  variables:
+    GIT_STRATEGY: none
+  image:
+    name: gcr.io/go-containerregistry/crane:debug
+    entrypoint: [ "" ]
+  cache: [ ]
+  stage: release
+  before_script:
+    - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - crane tag $CI_REGISTRY_IMAGE/momo-store-backend:${VERSION} latest
