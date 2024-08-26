@@ -1,8 +1,5 @@
 stages:
   - module-pipelines
-  - build
-  - test
-  - release
 
 frontend:
   stage: module-pipelines
@@ -18,6 +15,6 @@ backend:
   trigger:
     include: "backend/.gitlab-ci.yaml"
     strategy: depend
-  only:
-    changes:
-      - backend/*
+  # only:
+  #   changes:
+  #     - backend/*
