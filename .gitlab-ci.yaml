@@ -20,4 +20,4 @@ backend:
     strategy: depend
   only:
     changes:
-      - backend/**/*
+      - backend/*
