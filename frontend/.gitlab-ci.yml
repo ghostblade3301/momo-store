@@ -22,7 +22,7 @@ build-frontend-docker-job:
       --build-arg VERSION=$VERSION
       --cache=true
 
-sonarqube-backend-sast:
+sonarqube-frontend-sast:
   stage: test
   dependencies:
     - build-docker-code-job
