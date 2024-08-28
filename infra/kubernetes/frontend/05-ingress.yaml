@@ -1,0 +1,19 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: momo
+  name: momo-frontend
+spec:
+  ingressClassName: "nginx"
+  rules:
+  - host: "momo-store.wownage.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: momo-frontend
+            port:
+              number: 80
