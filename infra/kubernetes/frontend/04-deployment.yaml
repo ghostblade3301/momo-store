@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: momo
+  name: momo-frontend
+  labels:
+    app: momo-frontend
+spec:
+  replicas: 1
+  revisionHistoryLimit: 12
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: momo-frontend
+  template:
+    metadata:
+      labels:
+        app: momo-frontend
+    spec:
+      containers:
+        - name: momo-frontend
+          image: gitlab.praktikum-services.ru:5050/std-026-35/momo-store/momo-store-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - name: momo-frontend
+              containerPort: 8080
+          volumeMounts:
+          - name: nginx-conf
+            mountPath: /etc/nginx/conf.d/
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+      imagePullSecrets:
+        - name: docker-config-secret
