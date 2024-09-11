@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.service.namespace }}
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: {{ .Values.deployment.name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
+  strategy:
+    type: {{ .Values.deployment.type }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name }}
+    spec:
+      containers:
+        - name: {{ .Values.deployment.name }}
+          image: {{ .Values.deployment.image }}
+          imagePullPolicy: {{ .Values.deployment.imagePullPolicy }}
+          ports:
+            - name: {{ .Values.deployment.name }}
+              containerPort: {{ .Values.deployment.containerPort }}
+          volumeMounts:
+          - name: {{ .Values.configmap.name }}
+            mountPath: /etc/nginx/conf.d/
+      volumes:
+      - name: {{ .Values.configmap.name }}
+        configMap:
+          name: {{ .Values.configmap.name }}
+      imagePullSecrets:
+        - name: {{ .Values.secrets.name }}
