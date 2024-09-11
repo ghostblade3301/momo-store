@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: {{ .Values.deployment.namespace }}
+  namespace: {{ .Values.namespace.name }}
   name: {{ .Values.deployment.name }}
   labels:
     app: {{ .Values.deployment.name }}
@@ -30,4 +30,4 @@ spec:
             - name: {{ .Values.deployment.name }}
               containerPort: {{ .Values.deployment.containerPort }}
       imagePullSecrets:
-        - name: {{ .Values.deployment.imagePullSecretsName }}
+        - name: {{ .Values.secret.name }}

@@ -34,4 +34,4 @@ spec:
         configMap:
           name: {{ .Values.configmap.name }}
       imagePullSecrets:
-        - name: {{ .Values.secrets.name }}
+        - name: {{ .Values.secret.name }}
