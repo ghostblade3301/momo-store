@@ -18,3 +18,12 @@ backend:
   only:
     changes:
       - backend/*
+
+argocd:
+  stage: module-pipelines
+  trigger:
+    include: "infra/helm/.gitlab-ci.yml"
+    strategy: depend
+  only:
+    changes:
+      - frontend/helm/*
