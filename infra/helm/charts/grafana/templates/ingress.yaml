@@ -14,7 +14,7 @@ spec:
   ingressClassName: "nginx"
   tls:
     - hosts:
-      - "grafana.wownage.com"
+      - "grafana.wownage.ru"
       secretName: grafana-secret  
   rules:
   - host: {{ .Values.fqdn }}

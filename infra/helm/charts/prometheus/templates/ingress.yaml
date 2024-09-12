@@ -14,10 +14,10 @@ spec:
   ingressClassName: "nginx"
   tls:
     - hosts:
-      - "prometheus.wownage.com"
+      - "prometheus.wownage.ru"
       secretName: prometheus-secret
   rules:
-  - host: "prometheus.wownage.com"
+  - host: "prometheus.wownage.ru"
     http:
       paths:
       - path: /

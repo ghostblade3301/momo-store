@@ -11,7 +11,7 @@ spec:
   ingressClassName: "nginx"
   tls:
     - hosts:
-      - "momo-store.wownage.com"
+      - "momo-store.wownage.ru"
       secretName: momo-store-secret  
   rules:
   - host: {{ .Values.ingress.host }}

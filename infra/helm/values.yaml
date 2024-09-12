@@ -45,4 +45,4 @@ frontend:
     containerPort: 80
   ingress:
     name: momo-frontend
-    host: "momo-store.wownage.com"
+    host: "momo-store.wownage.ru"
