@@ -9,7 +9,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "yc-clusterissuer"
 spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+      - "prometheus.wownage.com"
+      secretName: prometheus-secret
   rules:
   - host: "prometheus.wownage.com"
     http:
