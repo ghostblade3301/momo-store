@@ -1,53 +1,55 @@
-{{- if (and (not .Values.useStatefulSet) (or (not .Values.persistence.enabled) (eq .Values.persistence.type "pvc"))) }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "grafana.fullname" . }}
-  namespace: {{ include "grafana.namespace" . }}
-  labels:
-    {{- include "grafana.labels" . | nindent 4 }}
-    {{- with .Values.labels }}
-    {{- toYaml . | nindent 4 }}
-    {{- end }}
-  {{- with .Values.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+  name: {{ .Chart.Name }}
+  namespace: {{ .Release.Namespace }}
 spec:
-  {{- if and (not .Values.autoscaling.enabled) (.Values.replicas) }}
-  replicas: {{ .Values.replicas }}
-  {{- end }}
-  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
-      {{- include "grafana.selectorLabels" . | nindent 6 }}
-  {{- with .Values.deploymentStrategy }}
-  strategy:
-    {{- toYaml . | trim | nindent 4 }}
-  {{- end }}
+      app: {{ .Chart.Name }}
   template:
     metadata:
       labels:
-        {{- include "grafana.selectorLabels" . | nindent 8 }}
-        {{- with .Values.podLabels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
-      annotations:
-        checksum/config: {{ include "grafana.configData" . | sha256sum }}
-        {{- if .Values.dashboards }}
-        checksum/dashboards-json-config: {{ include (print $.Template.BasePath "/dashboards-json-configmap.yaml") . | sha256sum }}
-        {{- end }}
-        checksum/sc-dashboard-provider-config: {{ include "grafana.configDashboardProviderData" . | sha256sum }}
-        {{- if and (or (and (not .Values.admin.existingSecret) (not .Values.env.GF_SECURITY_ADMIN_PASSWORD__FILE) (not .Values.env.GF_SECURITY_ADMIN_PASSWORD)) (and .Values.ldap.enabled (not .Values.ldap.existingSecret))) (not .Values.env.GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION) }}
-        checksum/secret: {{ include "grafana.secretsData" . | sha256sum }}
-        {{- end }}
-        {{- if .Values.envRenderSecret }}
-        checksum/secret-env: {{ tpl (toYaml .Values.envRenderSecret) . | sha256sum }}
-        {{- end }}
-        kubectl.kubernetes.io/default-container: {{ .Chart.Name }}
-        {{- with .Values.podAnnotations }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
+        app: {{ .Chart.Name }}
     spec:
-      {{- include "grafana.pod" . | nindent 6 }}
-{{- end }}
+      securityContext:
+        fsGroup: 472
+        supplementalGroups:
+          - 0
+      containers:
+        - name: {{ .Chart.Name }}
+          image: grafana/grafana:10.1.5
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http-grafana
+              containerPort: {{ .Values.port }}
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /robots.txt
+              port: {{ .Values.port }}
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: {{ .Values.port }}
+            timeoutSeconds: 1
+          resources:
+            requests:
+              cpu: 250m
+              memory: 750Mi
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana-pv
+      volumes:
+        - name: grafana-pv
+          persistentVolumeClaim:
+            claimName: grafana-pvc
