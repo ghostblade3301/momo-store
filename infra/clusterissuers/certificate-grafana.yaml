@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: domain-name-grafana
+  namespace: momo
+spec:
+  secretName: grafana-secret
+  issuerRef:
+    # ClusterIssuer, созданный вместе с Yandex CloudDNS ACME webhook
+    name: http01-clusterissuer-grafana
+    kind: ClusterIssuer
+  dnsNames:
+    # Домен должен входить в вашу публичную зону Cloud DNS
+    - grafana.wownage.ru

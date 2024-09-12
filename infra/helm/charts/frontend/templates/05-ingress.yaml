@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: {{ .Values.service.namespace }}
+  name: {{ .Values.ingress.name }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "yc-clusterissuer"
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+      - "momo-store.wownage.ru"
+      secretName: momo-store-secret  
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.service.name }}
+            port:
+              number: {{ .Values.service.port }}
