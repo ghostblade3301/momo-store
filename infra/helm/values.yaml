@@ -1,0 +1,48 @@
+backend:
+  namespace: 
+    name: momo
+  secret:
+    name: docker-config-secret
+    dockerconfigjson: ewogICAgImF1dGhzIjogewogICAgICAgICJnaXRsYWIucHJha3Rpa3VtLXNlcnZpY2VzLnJ1OjUwNTAiOnsKICAgICAgICAgICAgImF1dGgiOiJjM1JrTFRBeU5pMHpOVHB3TTNwUWFtRnBiMUZWVFdNNU5XTklWRVJvWVE9PSIKICAgICAgICB9CiAgICB9Cn0=
+  service:
+    name: momo-backend
+    type: ClusterIP
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
+    app: momo-backend
+  deployment:
+    name: momo-backend
+    replicas: 3
+    revisionHistoryLimit: 12
+    type: RollingUpdate
+    maxUnavailable: 2
+    maxSurge: 20%
+    image: gitlab.praktikum-services.ru:5050/std-026-35/momo-store/momo-store-backend:latest
+    imagePullPolicy: Always
+    containerPort: 8081
+frontend:
+  service:
+    namespace: momo
+    name: momo-frontend-service
+    app: momo-frontend
+    type: NodePort
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  secret:
+    name: docker-config-secret
+    dockerconfigjson: ewogICAgImF1dGhzIjogewogICAgICAgICJnaXRsYWIucHJha3Rpa3VtLXNlcnZpY2VzLnJ1OjUwNTAiOnsKICAgICAgICAgICAgImF1dGgiOiJjM1JrTFRBeU5pMHpOVHB3TTNwUWFtRnBiMUZWVFdNNU5XTklWRVJvWVE9PSIKICAgICAgICB9CiAgICB9Cn0=
+  configmap:
+    name: nginx-conf
+  deployment:
+    name: momo-frontend
+    replicas: 1
+    revisionHistoryLimit: 12
+    type: Recreate
+    image: gitlab.praktikum-services.ru:5050/std-026-35/momo-store/momo-store-frontend:latest
+    imagePullPolicy: Always
+    containerPort: 80
+  ingress:
+    name: momo-frontend
+    host: "momo-store.wownage.ru"
