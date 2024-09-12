@@ -1,0 +1,10 @@
+stages:
+  - build
+
+build-and-push-helm-package:
+  stage: build
+  image: dtzar/helm-kubectl
+  script:
+    - helm package infra/helm/
+    - curl -u ${NEXUS_REPO_USER}:${NEXUS_REPO_PASS} --upload-file momo-store-0.1.0.tgz https://nexus.praktikum-services.tech/repository/std-026-35-momo-store-helm/
+
