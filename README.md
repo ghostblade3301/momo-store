@@ -36,4 +36,5 @@
 
 # Реализация цикла CI/CD приложения
 Реализован цикл сборки, тестирования и доставки артефактов приложения в репозиторий. В GitlabCI организован pipeline в котором присутствуют данные этапы:
-
+![Image alt] (https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab1.png?ref_type=heads)
+![Image alt] (https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab2.png?ref_type=heads)
