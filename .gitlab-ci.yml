@@ -26,4 +26,4 @@ argocd:
     strategy: depend
   only:
     changes:
-      - frontend/helm/*
+      - infra/*

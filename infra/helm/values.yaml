@@ -46,3 +46,4 @@ frontend:
   ingress:
     name: momo-frontend
     host: "momo-store.wownage.ru"
+

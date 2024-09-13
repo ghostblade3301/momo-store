@@ -1,2 +1,3 @@
 fqdn: prometheus.wownage.ru
 port: 9090
+namespace: momo
