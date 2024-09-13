@@ -42,12 +42,27 @@
 ![gitlab2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab2.png?ref_type=heads)
 
 ## Build
+
 На этом этапе осуществляется сборка артефактов приложения и сборка Docker образов. Артефакты после сборки тегируются и загружаются в Nexus repository
 ![nexus1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/nexus1.png?ref_type=heads) 
 ## Test
+
 На этапе Test осуществляется проверка кода Sonarqube и SAST
 ![sonarqube1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/sonarqube1.png?ref_type=heads)
 ## Release
+
 Если проверка прошла успешно, то Docker образы тэгируются и загружаются в Gitlab Container Registry
 ![gitlab-registry1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab-registry1.png?ref_type=heads)
 ![gitlab-registry1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab-registry2.png?ref_type=heads)
+
+# Доставка приложения
+Для этой цели был выбран инструмент gitops - ArgoCD.
+Его плюсы:
+1. Удобный интерфейс. Очень наглядное представление развернутых в Kubernetes сущностей.
+2. Постоянная синхронизация.
+3. Удобный просмотр логов. 
+![argo1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/argo2.png?ref_type=heads)
+![argo2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/argo1.png?ref_type=heads)
+
+# Мониторинг
+Мониторинг кластера осуществляется стэком Prometheus/Grafana. Prometheus снимает метрики с компонентов кластера и приложений, Grafana визуализирует эти данные в графическом интерфейсе и представляет их в виде удобно настраиваемых дашбордов.
