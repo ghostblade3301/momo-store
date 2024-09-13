@@ -56,6 +56,7 @@
 ![gitlab-registry1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab-registry2.png?ref_type=heads)
 
 # Доставка приложения
+
 Для этой цели был выбран инструмент gitops - ArgoCD.
 Его плюсы:
 1. Удобный интерфейс. Очень наглядное представление развернутых в Kubernetes сущностей.
@@ -65,4 +66,11 @@
 ![argo2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/argo1.png?ref_type=heads)
 
 # Мониторинг
+
 Мониторинг кластера осуществляется стэком Prometheus/Grafana. Prometheus снимает метрики с компонентов кластера и приложений, Grafana визуализирует эти данные в графическом интерфейсе и представляет их в виде удобно настраиваемых дашбордов.
+![grafana1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/grafana1.png?ref_type=heads)
+
+# Url's
+
+1. Фронтенд приложения - https://momo-store.wownage.ru/
+2. Дашборды Grafana - https://grafana.wownage.ru/
