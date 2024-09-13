@@ -41,13 +41,13 @@
 ![gitlab1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab1.png?ref_type=heads)
 ![gitlab2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab2.png?ref_type=heads)
 
-1. Build
+## Build
 На этом этапе осуществляется сборка артефактов приложения и сборка Docker образов. Артефакты после сборки тегируются и загружаются в Nexus repository
 ![nexus1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/nexus1.png?ref_type=heads) 
-2. Test
+## Test
 На этапе Test осуществляется проверка кода Sonarqube и SAST
 ![sonarqube1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/sonarqube1.png?ref_type=heads)
-3. Release
+## Release
 Если проверка прошла успешно, то Docker образы тэгируются и загружаются в Gitlab Container Registry
 ![gitlab-registry1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab-registry1.png?ref_type=heads)
 ![gitlab-registry1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab-registry2.png?ref_type=heads)
