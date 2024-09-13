@@ -3,7 +3,7 @@ groups:
   - name: Sausage store rules
     rules:
     - alert: InstanceDown
-      expr: up{app="backend"} == 0
+      expr: up{app="momo-backend"} == 0
       for: 1m
       labels:
         severity: critical
