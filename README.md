@@ -36,6 +36,14 @@
 └── README.md
 ```
 
+# YandexCloud
+
+Для реализации инфраструктуры приложения в облаке был выбран Managed Kubernetes Service в яндекс облаке.
+![cloud1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/cloud1.png?ref_type=heads)
+
+Также из сервисов яндекс облака был установлен балансировщик ingress-nginx
+![cloud2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/cloud2.png?ref_type=heads)
+
 # Реализация цикла CI/CD приложения
 Реализован цикл сборки, тестирования и доставки артефактов приложения в репозиторий. В GitlabCI организован pipeline в котором присутствуют данные этапы:
 ![gitlab1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab1.png?ref_type=heads)
