@@ -40,34 +40,34 @@
 
 Для реализации инфраструктуры приложения в облаке был выбран Managed Kubernetes Service в яндекс облаке.
 
-![cloud1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/cloud1.png?ref_type=heads)
+![cloud1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/cloud1.png?ref_type=heads)
 
 Также из сервисов яндекс облака был установлен балансировщик ingress-nginx
 
-![cloud2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/cloud2.png?ref_type=heads)
+![cloud2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/cloud2.png?ref_type=heads)
 
 # Реализация цикла CI/CD приложения
 Реализован цикл сборки, тестирования и доставки артефактов приложения в репозиторий. В GitlabCI организован pipeline в котором присутствуют данные этапы:
 
-![gitlab1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab1.png?ref_type=heads)
-![gitlab2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab2.png?ref_type=heads)
+![gitlab1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/gitlab1.png?ref_type=heads)
+![gitlab2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/gitlab2.png?ref_type=heads)
 
 ## Build
 
 На этом этапе осуществляется сборка артефактов приложения и сборка Docker образов. Артефакты после сборки тегируются и загружаются в Nexus repository
 
-![nexus1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/nexus1.png?ref_type=heads) 
+![nexus1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/nexus1.png?ref_type=heads) 
 ## Test
 
 На этапе Test осуществляется проверка кода Sonarqube и SAST
 
-![sonarqube1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/sonarqube1.png?ref_type=heads)
+![sonarqube1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/sonarqube1.png?ref_type=heads)
 ## Release
 
 Если проверка прошла успешно, то Docker образы тэгируются и загружаются в Gitlab Container Registry
 
-![gitlab-registry1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab-registry1.png?ref_type=heads)
-![gitlab-registry1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/gitlab-registry2.png?ref_type=heads)
+![gitlab-registry1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/gitlab-registry1.png?ref_type=heads)
+![gitlab-registry1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/gitlab-registry2.png?ref_type=heads)
 
 # Доставка приложения
 
@@ -77,14 +77,14 @@
 2. Постоянная синхронизация.
 3. Удобный просмотр логов. 
 
-![argo1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/argo2.png?ref_type=heads)
-![argo2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/argo1.png?ref_type=heads)
+![argo1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/argo2.png?ref_type=heads)
+![argo2](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/argo1.png?ref_type=heads)
 
 # Мониторинг
 
 Мониторинг кластера осуществляется стэком Prometheus/Grafana. Prometheus снимает метрики с компонентов кластера и приложений, Grafana визуализирует эти данные в графическом интерфейсе и представляет их в виде удобно настраиваемых дашбордов.
 
-![grafana1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/readme/screenshots/grafana1.png?ref_type=heads)
+![grafana1](https://gitlab.praktikum-services.ru/std-026-35/momo-store/-/raw/dev/screenshots/grafana1.png?ref_type=heads)
 
 # Url's
 
