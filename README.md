@@ -1,21 +1,39 @@
-# Momo Store aka Пельменная №2
+# Дипломный проект.
+Основные задачи:
+1. Необходимо реализовать полный цикл сборки-поставки приложения, используя практики CI/CD.
+2. Хранить код в GitLab с использованием любого git-flow
+3. Артефакты сборки (бинарные файлы, docker-образы или др.) публикуются в систему хранения (Nexus или аналоги)
+4. Артефакты сборки версионируются
+5. Написаны Dockerfile'ы для сборки Docker-образов бэкенда и фронтенда
+    - Бэкенд: бинарный файл Go в Docker-образе
+    - Фронтенд: HTML-страница раздаётся с Nginx
+6. Kubernetes-кластер описан в виде кода, и код хранится в репозитории GitLab
+7. Написан Helm-чарт для публикации приложения
+8. Приложение подключено к системам логирования и мониторинга
+9. Есть дашборд, в котором можно посмотреть логи и состояние приложения
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/9394918/167876466-2c530828-d658-4efe-9064-825626cc6db5.png">
+## Структура проекта.
+├── backend
+│   ├── cmd
+│   ├── go.mod
+│   ├── go.sum
+│   └── internal
+├── frontend
+│   ├── babel.config.js
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   ├── src
+│   ├── tsconfig.json
+│   └── vue.config.js
+├── infra
+│   ├── clusterissuers
+│   ├── docker
+│   ├── helm
+│   ├── kubernetes
+│   └── terraform
+└── README.md
 
-## Frontend
+# Реализация цикла CI/CD приложения
+Реализован цикл сборки, тестирования и доставки артефактов приложения в репозиторий. В GitlabCI организован pipeline в котором присутствуют данные этапы:
 
-```bash
-npm install
-NODE_ENV=production VUE_APP_API_URL=http://localhost:8081 npm run serve
-```
-
-## Backend
-
-```bash
-go run ./cmd/api
-go test -v ./... 
-```
-grafana
-admin
-X2y07Oifodrf869gHSOsAPZE16r4dinHbZ73qE6E
-http://trickster:8480
