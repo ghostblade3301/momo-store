@@ -88,5 +88,5 @@
 
 # Url's
 
-1. Фронтенд приложения - https://momo-store.wownage.ru/
-2. Дашборды Grafana - https://grafana.wownage.ru/
+1. Фронтенд приложения - https://momo-store.wownage.ru/ [уже не активны]
+2. Дашборды Grafana - https://grafana.wownage.ru/       [уже не активны]
